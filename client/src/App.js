@@ -1,11 +1,12 @@
-import { Container, Header } from 'semantic-ui-react'
+import Router from './Router';
+import { BrowserRouter } from 'react-router-dom';
 
-function App() {
+const App = () => {
   return (
-    <>
-      iiiiiiiiiiiii
-    </>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
