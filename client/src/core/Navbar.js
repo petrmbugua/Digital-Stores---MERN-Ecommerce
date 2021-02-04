@@ -19,6 +19,9 @@ const Navbar = withRouter(({ history, path }) => {
 
   const [activeItem, setActiveItem] = useState('home');
 
+    // const [isActive, setIsActive] = useState('');
+  // const [isPartActive, setIsPartActive] = useState('');
+
   const setActiveItemOnClick = (e, { name }) => {
     setActiveItem(name);
   };

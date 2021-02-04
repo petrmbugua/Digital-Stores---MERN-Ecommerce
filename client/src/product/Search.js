@@ -1,16 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Segment,
-  Divider,
-  Icon,
-  Input,
-  Dropdown,
-  Select,
-} from 'semantic-ui-react';
-
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
+import { Segment, Divider, Icon, Input } from 'semantic-ui-react';
 import { list } from './api-product.js';
 import Products from './Products';
 
@@ -48,27 +38,33 @@ export default function Search(props) {
     }
   };
 
- 
-
   return (
     <Segment>
       <>
-      
-        <TextField
-        id='select-category'
-        select
-        label='Select category'
-        value={values.category}
-        onChange={handleChange('category')}
-      >
-        <MenuItem value='All'>All</MenuItem>
-        {props.categories.map((option) => (
-          <MenuItem key={option} value={option}>
-            {option}
-          </MenuItem>
-        ))}
+        <label>Select Category</label>
+        <select value={values.category} onChange={handleChange('category')}>
+          <option value='All'>All</option>
+          {props.categories.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
 
-      </TextField>
+        {/* <TextField
+          id='select-category'
+          select
+          label='Select category'
+          value={values.category}
+          onChange={handleChange('category')}
+        >
+          <MenuItem value='All'>All</MenuItem>
+          {props.categories.map((option) => (
+            <MenuItem key={option} value={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </TextField> */}
       </>
 
       <Input

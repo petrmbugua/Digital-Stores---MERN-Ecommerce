@@ -6,13 +6,11 @@ import {
   Icon,
   Message,
   Container,
-  Checkbox,
+  // Checkbox,
   Confirm,
 } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import { create } from './api-user.js';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 export default function Signup() {
   const [values, setValues] = useState({
@@ -35,11 +33,11 @@ export default function Signup() {
     return <Redirect to='/signin' />;
   }
 
-  const handleChange = (name) => (event) => {
-    setValues({ ...values, [name]: event.target.value });
+  const handleChange = (name) => (e) => {
+    setValues({ ...values, [name]: e.target.value });
   };
 
-  const handleCheck = (event, checked) => {
+  const handleCheck = (e, checked) => {
     setValues({ ...values, seller: checked });
   };
 
@@ -95,7 +93,17 @@ export default function Signup() {
                     />
                   </Form.Field>
 
-                  <Form.Field>
+                  {/* <Form.Field>
+                    <label>Are you a Seller ?</label>
+                    <Checkbox
+                      toggle
+                      checked={values.seller}
+                      onChange={handleCheck}
+                      label={values.seller ? 'Yes' : 'No'}
+                    />
+                  </Form.Field> */}
+
+                  {/* <Form.Field>
                     <FormControlLabel
                       control={
                         <Switch
@@ -105,7 +113,7 @@ export default function Signup() {
                       }
                       label={values.seller ? 'Yes' : 'No'}
                     />
-                  </Form.Field>
+                  </Form.Field> */}
 
                   <Form.Field>
                     <label>Password</label>

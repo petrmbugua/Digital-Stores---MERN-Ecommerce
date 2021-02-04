@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Button, Card, Form, Icon, Message } from 'semantic-ui-react';
+import { Button, Card, Checkbox, Form, Icon, Message } from 'semantic-ui-react';
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
@@ -111,13 +111,25 @@ export default function EditProfile({ match }) {
 
                 <Form.Field>
                   <label>Seller Account</label>
+                  <Checkbox
+                    toggle
+                    checked={values.seller}
+                    onChange={handleCheck}
+                    label={
+                      values.seller ? 'You Are Already A Seller' : 'Not A Seller Yet'
+                    }
+                  />
+                </Form.Field>
+
+                {/* <Form.Field>
+                  <label>Seller Account</label>
                   <FormControlLabel
                     control={
                       <Switch checked={values.seller} onChange={handleCheck} />
                     }
                     label={values.seller ? 'Active' : 'Inactive'}
                   />
-                </Form.Field>
+                </Form.Field> */}
 
                 <Form.Field>
                   <label>Password</label>
