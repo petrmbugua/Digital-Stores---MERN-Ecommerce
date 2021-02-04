@@ -4,43 +4,11 @@ import { Button, Card, Form, Icon, Message } from 'semantic-ui-react';
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import { makeStyles } from '@material-ui/core/styles';
 import auth from './../auth/auth-helper';
 import { read, update } from './api-user.js';
 import { Redirect } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-  card: {
-    maxWidth: 600,
-    margin: 'auto',
-    textAlign: 'center',
-    marginTop: theme.spacing(5),
-    paddingBottom: theme.spacing(2),
-  },
-  title: {
-    margin: theme.spacing(2),
-    color: theme.palette.protectedTitle,
-  },
-  error: {
-    verticalAlign: 'middle',
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 300,
-  },
-  submit: {
-    margin: 'auto',
-    marginBottom: theme.spacing(2),
-  },
-  subheading: {
-    marginTop: theme.spacing(2),
-    color: theme.palette.openTitle,
-  },
-}));
-
 export default function EditProfile({ match }) {
-  const classes = useStyles();
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -145,14 +113,7 @@ export default function EditProfile({ match }) {
                   <label>Seller Account</label>
                   <FormControlLabel
                     control={
-                      <Switch
-                        classes={{
-                          checked: classes.checked,
-                          bar: classes.bar,
-                        }}
-                        checked={values.seller}
-                        onChange={handleCheck}
-                      />
+                      <Switch checked={values.seller} onChange={handleCheck} />
                     }
                     label={values.seller ? 'Active' : 'Inactive'}
                   />

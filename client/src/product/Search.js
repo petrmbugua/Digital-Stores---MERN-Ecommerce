@@ -1,47 +1,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Segment, Divider, Icon, Input } from 'semantic-ui-react';
-
-import { makeStyles } from '@material-ui/core/styles';
+import {
+  Segment,
+  Divider,
+  Icon,
+  Input,
+  Dropdown,
+  Select,
+} from 'semantic-ui-react';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import { list } from './api-product.js';
 import Products from './Products';
 
-const useStyles = makeStyles((theme) => ({
-  card: {
-    margin: 'auto',
-    textAlign: 'center',
-    paddingTop: 10,
-    backgroundColor: '#80808024',
-  },
-  menu: {
-    width: 200,
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 130,
-    verticalAlign: 'bottom',
-    marginBottom: '20px',
-  },
-  searchField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 300,
-    marginBottom: '20px',
-  },
-  searchButton: {
-    minWidth: '20px',
-    height: '30px',
-    padding: '0 8px',
-    marginBottom: '20px',
-  },
-}));
-
 export default function Search(props) {
-  const classes = useStyles();
   const [values, setValues] = useState({
     category: '',
     search: '',
@@ -74,21 +47,19 @@ export default function Search(props) {
       search();
     }
   };
+
+ 
+
   return (
     <Segment>
-      <TextField
+      <>
+      
+        <TextField
         id='select-category'
         select
         label='Select category'
-        className={classes.textField}
         value={values.category}
         onChange={handleChange('category')}
-        SelectProps={{
-          MenuProps: {
-            className: classes.menu,
-          },
-        }}
-        margin='normal'
       >
         <MenuItem value='All'>All</MenuItem>
         {props.categories.map((option) => (
@@ -96,7 +67,9 @@ export default function Search(props) {
             {option}
           </MenuItem>
         ))}
+
       </TextField>
+      </>
 
       <Input
         type='search'

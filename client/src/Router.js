@@ -6,7 +6,7 @@ import Signin from './auth/Signin';
 import EditProfile from './user/EditProfile';
 import Profile from './user/Profile';
 import PrivateRoute from './auth/PrivateRoute';
-import Menu from './core/Menu';
+import Navbar from './core/Navbar';
 import NewShop from './shop/NewShop';
 import Shops from './shop/Shops';
 import MyShops from './shop/MyShops';
@@ -22,7 +22,7 @@ import Order from './order/Order';
 const Router = () => {
   return (
     <>
-      <Menu />
+      <Navbar />
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/users' component={Users} />

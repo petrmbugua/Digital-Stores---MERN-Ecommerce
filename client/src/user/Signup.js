@@ -6,55 +6,34 @@ import {
   Icon,
   Message,
   Container,
+  Checkbox,
+  Confirm,
 } from 'semantic-ui-react';
-
-import { makeStyles } from '@material-ui/core/styles';
+import { Redirect } from 'react-router-dom';
 import { create } from './api-user.js';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { Link } from 'react-router-dom';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const useStyles = makeStyles((theme) => ({
-  card: {
-    maxWidth: 600,
-    margin: 'auto',
-    textAlign: 'center',
-    marginTop: theme.spacing(5),
-    paddingBottom: theme.spacing(2),
-  },
-  error: {
-    verticalAlign: 'middle',
-  },
-  title: {
-    marginTop: theme.spacing(2),
-    color: theme.palette.openTitle,
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 300,
-  },
-  submit: {
-    margin: 'auto',
-    marginBottom: theme.spacing(2),
-  },
-}));
-
 export default function Signup() {
-  const classes = useStyles();
   const [values, setValues] = useState({
     name: '',
     password: '',
     email: '',
     seller: '',
-    open: false,
+    // open: false,
     error: '',
   });
+  const [redirect, setRedirect] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleRequestClose = () => {
+    setOpen(false);
+  };
+  const confirmAccount = () => {
+    setRedirect(true);
+  };
+  if (redirect) {
+    return <Redirect to='/signin' />;
+  }
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
@@ -75,7 +54,12 @@ export default function Signup() {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        setValues({ ...values, error: '', open: true });
+        setValues({
+          ...values,
+          error: '',
+          // open: true
+        });
+        setOpen(true);
       }
     });
   };
@@ -112,14 +96,9 @@ export default function Signup() {
                   </Form.Field>
 
                   <Form.Field>
-                    <label>Are Your A Seller ?</label>
                     <FormControlLabel
                       control={
                         <Switch
-                          classes={{
-                            checked: classes.checked,
-                            bar: classes.bar,
-                          }}
                           checked={values.seller}
                           onChange={handleCheck}
                         />
@@ -149,31 +128,23 @@ export default function Signup() {
                   content={values.error}
                 />
               )}
-              <div className='ui two buttons'>
-                <Button basic color='green' onClick={clickSubmit}>
-                  Submit
-                </Button>
-              </div>
+              <>
+                <Button onClick={clickSubmit}>Submit</Button>
+              </>
             </Card.Content>
           </Card>
         </Card.Group>
       </Container>
 
-      <Dialog open={values.open} disableBackdropClick={true}>
-        <DialogTitle>New Account</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            New account successfully created.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Link to='/signin'>
-            <Button color='primary' autoFocus='autoFocus' variant='contained'>
-              Sign In
-            </Button>
-          </Link>
-        </DialogActions>
-      </Dialog>
+      <Confirm
+        open={open}
+        header='New Account Created'
+        content='New account successfully created.'
+        cancelButton='Cancel'
+        confirmButton='Signin'
+        onCancel={handleRequestClose}
+        onConfirm={confirmAccount}
+      />
     </>
   );
 }
