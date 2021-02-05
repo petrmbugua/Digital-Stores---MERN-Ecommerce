@@ -18,11 +18,13 @@ import Product from './product/Product';
 import Cart from './cart/Cart';
 import ShopOrders from './order/ShopOrders';
 import Order from './order/Order';
+import { Container } from 'semantic-ui-react';
 
 const Router = () => {
   return (
     <>
       <Navbar />
+      <Container>
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/users' component={Users} />
@@ -54,6 +56,7 @@ const Router = () => {
           component={EditProduct}
         />
       </Switch>
+      </Container>
     </>
   );
 };
