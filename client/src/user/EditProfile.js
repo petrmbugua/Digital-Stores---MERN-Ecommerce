@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
 import { Button, Card, Checkbox, Form, Icon, Message } from 'semantic-ui-react';
-
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import auth from './../auth/auth-helper';
 import { read, update } from './api-user.js';
 import { Redirect } from 'react-router-dom';

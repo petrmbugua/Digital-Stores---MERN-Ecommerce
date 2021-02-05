@@ -1,26 +1,11 @@
 import React, { useState } from 'react';
-import { Menu, Icon, Segment, Button, Label } from 'semantic-ui-react';
+import { Menu, Icon, Segment, Label } from 'semantic-ui-react';
 import auth from '../auth/auth-helper';
 import { Link, withRouter } from 'react-router-dom';
 import cart from '../cart/cart-helper';
 
-
-const Navbar = withRouter(({ history, path }) => {
-
-  const isActive = (history, path) => {
-    if (history.location.pathname === path) return { color: '#bef67a' };
-    else return { color: '#ffffff' };
-  };
-
-  const isPartActive = (history, path) => {
-    if (history.location.pathname.includes(path)) return { color: '#bef67a' };
-    else return { color: '#ffffff' };
-  };
-
+const Navbar = withRouter(({ history }) => {
   const [activeItem, setActiveItem] = useState('home');
-
-    // const [isActive, setIsActive] = useState('');
-  // const [isPartActive, setIsPartActive] = useState('');
 
   const setActiveItemOnClick = (e, { name }) => {
     setActiveItem(name);
@@ -29,33 +14,38 @@ const Navbar = withRouter(({ history, path }) => {
   return (
     <Segment inverted>
       <Menu inverted pointing secondary>
-        <Menu.Item
-          name='home'
-          active={activeItem === 'home'}
-          onClick={setActiveItemOnClick}
-        />
+        <Menu.Item header>Digital Stores</Menu.Item>
+
         <>
           <Menu.Item
+            as={Link}
+            to='/'
+            name='home'
+            active={activeItem === 'home'}
+            onClick={setActiveItemOnClick}
           >
-          <Link to='/'>
-              <Icon className='home' style={isActive(history, '/')} />
-            </Link>
+            <Icon name='home' />
           </Menu.Item>
 
-          <Menu.Item>
-            <Link to='/shops/all'>
-              <Button style={isActive(history, '/shops/all')}>All Shops</Button>
-            </Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to='/cart'>
-              <Button style={isActive(history, '/cart')}>
-                Cart
-                <Label>
-                  <Icon name='cart plus' /> {cart.itemTotal()}
-                </Label>
-              </Button>
-            </Link>
+          <Menu.Item
+            as={Link}
+            to='/shops/all'
+            name='All Shops'
+            active={activeItem === 'All Shops'}
+            onClick={setActiveItemOnClick}
+          />
+
+          <Menu.Item
+            as={Link}
+            to='/cart'
+            name='cart plus'
+            active={activeItem === 'cart plus'}
+            onClick={setActiveItemOnClick}
+          >
+            Cart{' '}
+            <Label>
+              <Icon name='cart plus' /> {cart.itemTotal()}
+            </Label>
           </Menu.Item>
         </>
 
@@ -63,54 +53,54 @@ const Navbar = withRouter(({ history, path }) => {
           <Menu.Menu position='right'>
             {!auth.isAuthenticated() && (
               <>
-                <Menu.Item>
-                  <Link to='/signup'>
-                    <Button style={isActive(history, '/signup')}>
-                      Sign up
-                    </Button>
-                  </Link>
-                </Menu.Item>
-                <Menu.Item>
-                  <Link to='/signin'>
-                    <Button style={isActive(history, '/signin')}>
-                      Sign In
-                    </Button>
-                  </Link>
-                </Menu.Item>
+                <Menu.Item
+                  as={Link}
+                  to='/signup'
+                  name='Sign up'
+                  active={activeItem === 'Sign up'}
+                  onClick={setActiveItemOnClick}
+                />
+
+                <Menu.Item
+                  as={Link}
+                  to='/signin'
+                  name='Sign In'
+                  active={activeItem === 'Sign In'}
+                  onClick={setActiveItemOnClick}
+                />
               </>
             )}
             {auth.isAuthenticated() && (
               <>
                 {auth.isAuthenticated().user.seller && (
-                  <Menu.Item>
-                    <Link to='/seller/shops'>
-                      <Button style={isPartActive(history, '/seller/')}>
-                        My Shops
-                      </Button>
-                    </Link>
+                  <Menu.Item
+                    as={Link}
+                    to='/seller/shops'
+                    name='My Shops'
+                    active={activeItem === 'My Shops'}
+                    onClick={setActiveItemOnClick}
+                  >
+                    My Shops
                   </Menu.Item>
                 )}
-                <Menu.Item>
-                  <Link to={'/user/' + auth.isAuthenticated().user._id}>
-                    <Button
-                      style={isActive(
-                        history,
-                        '/user/' + auth.isAuthenticated().user._id
-                      )}
-                    >
-                      My Profile
-                    </Button>
-                  </Link>
+                <Menu.Item
+                  as={Link}
+                  to={'/user/' + auth.isAuthenticated().user._id}
+                  name='My Profile'
+                  active={activeItem === 'My Profile'}
+                  onClick={setActiveItemOnClick}
+                >
+                  {' '}
+                  My Profile
                 </Menu.Item>
 
-                <Menu.Item>
-                  <Button
-                    onClick={() => {
-                      auth.clearJWT(() => history.push('/'));
-                    }}
-                  >
-                    Sign out
-                  </Button>
+                <Menu.Item
+                  onClick={() => {
+                    auth.clearJWT(() => history.push('/'));
+                  }}
+                >
+                  {' '}
+                  Sign out
                 </Menu.Item>
               </>
             )}
