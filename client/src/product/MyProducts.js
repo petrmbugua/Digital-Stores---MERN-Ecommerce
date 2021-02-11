@@ -53,7 +53,7 @@ export default function MyProducts(props) {
               <Image
                 size='small'
                 src={
-                  '/api/product/image/' +
+                  `${process.env.REACT_APP_API}/api/product/image/` +
                   product._id +
                   '?' +
                   new Date().getTime()

@@ -76,8 +76,10 @@ export default function EditShop({ match }) {
   };
 
   const logoUrl = values.id
-    ? `/api/shops/logo/${values.id}?${new Date().getTime()}`
-    : '/api/shops/defaultphoto';
+    ? `${process.env.REACT_APP_API}/api/shops/logo/${
+        values.id
+      }?${new Date().getTime()}`
+    : `${process.env.REACT_APP_API}/api/shops/defaultphoto`;
   if (values.redirect) {
     return <Redirect to={'/seller/shops'} />;
   }

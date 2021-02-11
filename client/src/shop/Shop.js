@@ -4,9 +4,7 @@ import { read } from './api-shop.js';
 import Products from './../product/Products';
 import { listByShop } from './../product/api-product.js';
 
-
 export default function Shop({ match }) {
-
   const [shop, setShop] = useState('');
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
@@ -67,8 +65,10 @@ export default function Shop({ match }) {
   }, [match.params.shopId]);
 
   const logoUrl = shop._id
-    ? `/api/shops/logo/${shop._id}?${new Date().getTime()}`
-    : '/api/shops/defaultphoto';
+    ? `${process.env.REACT_APP_API}/api/shops/logo/${
+        shop._id
+      }?${new Date().getTime()}`
+    : `${process.env.REACT_APP_API}/api/shops/defaultphoto`;
   return (
     <Segment>
       <Grid>

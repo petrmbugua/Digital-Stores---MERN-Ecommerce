@@ -83,8 +83,10 @@ export default function EditProduct({ match }) {
     setValues({ ...values, [name]: value });
   };
   const imageUrl = values.id
-    ? `/api/product/image/${values.id}?${new Date().getTime()}`
-    : '/api/product/defaultphoto';
+    ? `${process.env.REACT_APP_API}/api/product/image/${
+        values.id
+      }?${new Date().getTime()}`
+    : `${process.env.REACT_APP_API}/api/product/defaultphoto`;
   if (values.redirect) {
     return <Redirect to={'/seller/shop/edit/' + match.params.shopId} />;
   }

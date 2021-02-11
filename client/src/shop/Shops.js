@@ -34,7 +34,10 @@ export default function Shops() {
                   alt={shop.name}
                   size='small'
                   src={
-                    '/api/shops/logo/' + shop._id + '?' + new Date().getTime()
+                    `${process.env.REACT_APP_API}/api/shops/logo/` +
+                    shop._id +
+                    '?' +
+                    new Date().getTime()
                   }
                 />
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Segment, Icon, Grid, Item, } from 'semantic-ui-react';
+import { Segment, Icon, Grid, Item } from 'semantic-ui-react';
 import { read, listRelated } from './api-product.js';
 import { Link } from 'react-router-dom';
 import Suggestions from './../product/Suggestions';
@@ -47,8 +47,10 @@ export default function Product({ match }) {
   }, [match.params.productId]);
 
   const imageUrl = product._id
-    ? `/api/product/image/${product._id}?${new Date().getTime()}`
-    : '/api/product/defaultphoto';
+    ? `${process.env.REACT_APP_API}/api/product/image/${
+        product._id
+      }?${new Date().getTime()}`
+    : `${process.env.REACT_APP_API}/api/product/defaultphoto`;
   return (
     <Segment>
       <Grid columns={2} divided>

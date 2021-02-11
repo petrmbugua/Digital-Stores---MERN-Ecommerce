@@ -63,7 +63,7 @@ export default function MyShops() {
                       <Image
                         size='small'
                         src={
-                          '/api/shops/logo/' +
+                          `${process.env.REACT_APP_API}/api/shops/logo/` +
                           shop._id +
                           '?' +
                           new Date().getTime()

@@ -28,7 +28,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(compress());
 app.use(helmet());
-app.use(cors());
+// app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 readdirSync('./routes').map((r) => app.use('/', require('./routes/' + r)));
 

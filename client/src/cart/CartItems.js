@@ -50,7 +50,10 @@ export default function CartItems(props) {
                     <Item>
                       <Item.Image
                         size='small'
-                        src={'/api/product/image/' + item.product._id}
+                        src={
+                          `${process.env.REACT_APP_API}/api/product/image/` +
+                          item.product._id
+                        }
                       />
 
                       <Item.Content>
